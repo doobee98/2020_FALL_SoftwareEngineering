@@ -1,39 +1,15 @@
-# ## specifications TEST
-# ./tree --help
-# ./tree --version
-
-# ## error argument TEST
-# ./tree -m
-
-# ## printit() TEST
-# ./tree -A -q
-# ./tree -S -N
-# ./tree -H htmltest -R
-
-# ## complexed options TEST
-# ./tree . ./test_dir -a -f -p -u -g -s -D -F -t -x -l
-
-# ## patmatch() TEST
-# ./tree -P "*.sh" -I "[0-9]*\\h?"
-
-# ## big size directory (lflag?) TEST
-# ./tree / -i -d -L 3 -o result
-
-# ## other options TEST
-# ./tree -n -C -l
-
-
 ## (LINE 138-238)   default flags     (-P, -I is tested below)        
 ./tree -a -l -f -p -u -g -s -D -F -t -x -n
 ./tree -i -d -C -L 3 -o result 
 ## (LINE 863)       with printit() branch test
 ./tree . -A -q
 ./tree . -S -N
-./tree . -L 1 -H htmltest -R
+./tree . -L 1 -R -H htmltest
 
 ## (LINE 138-238)   flag error case
 ./tree -L
 ./tree -L aa
+./tree -L 2147483649    ## error output
 ./tree --help
 ./tree --version
 ./tree -m
@@ -56,8 +32,13 @@
 ## (LINE 394)       no directory
 ./tree ./unexisted_directory
 
-## (LINE 407-504)   00Tree.html options
-# ./tree . -i -p -u -g -s -D -f -L 1 -H htmltest -R
+## (LINE 607)       virtual memory exhaust
+mkdir error_dir
+cd error_dir
+rm -rf ../error_dir
+../tree -H htmltest
+cd ..
+rm -rf error_dir
 
 ## (LINE 631)       long current directory name
 cd ./test_dir/longlonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglong

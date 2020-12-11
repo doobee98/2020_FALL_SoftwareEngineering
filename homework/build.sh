@@ -1,1 +1,2 @@
+mkdir ./test_dir/longlonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglong
 gcc -coverage -o tree tree.c
